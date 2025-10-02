@@ -24,6 +24,7 @@ func _ready():
 
 ## Initialize position history with current position
 func init_history():
+	step_history.clear()
 	step_history.append(position)
 
 ## Attempt to move the spawner in the given direction.
@@ -61,7 +62,7 @@ func step():
 
 ## Undo last move by restoring previous position
 func undo():
-	if not len(step_history) == 1:
+	if step_history.size() > 1:
 		var last_position = step_history[-2]
 		step_history.pop_back()
 		position = last_position

@@ -10,6 +10,13 @@ func win(_trash):
 	var regex = RegEx.new()
 	regex.compile(r"level_(\d+)\.tscn")
 	var result = regex.search(level_name)
+	
+	# If level name doesn't match expected pattern, return to level select
+	if result == null:
+		push_warning("Could not parse level number from: " + level_name)
+		get_tree().call_deferred('change_scene_to_file', "res://scenes/ui/levels_menu.tscn")
+		return
+	
 	var levelnumber = result.get_string(1)
 	var next_level_path = "res://scenes/levels/level_%d.tscn" % (int(levelnumber) + 1)
 	# Try to load next level, or return to level select if no more levels

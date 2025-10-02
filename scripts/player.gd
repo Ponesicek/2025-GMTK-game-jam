@@ -64,9 +64,6 @@ func _can_push(cast: RayCast2D, delta: Vector2) -> bool:
 ## Move the player in the specified direction (grid-based).
 ## Handles both normal movement and sliding on fast tiles.
 ## Returns true if the move was successful
-## Move the player in the specified direction (grid-based).
-## Handles both normal movement and sliding on fast tiles.
-## Returns true if the move was successful
 func move(destination: Vector2) -> bool:
 	if destination == Vector2.ZERO:
 		return true
@@ -96,9 +93,10 @@ func move(destination: Vector2) -> bool:
 			position += dir
 			slid = true
 		break
+	if safety == 0:
+		push_warning("Fast line movement reached safety limit")
 	return slid
 
-## Undo the last action (for clones: go back in replay, for player: restore last position)
 ## Undo the last action (for clones: go back in replay, for player: restore last position)
 func undo():
 	if clone:
@@ -131,7 +129,6 @@ func step():
 		replay_step += 1
 
 ## Reset to the beginning of the loop
-## Reset to the beginning of the loop
 func reset_loop():
 	position = step_history[0]
 	replay_step = 0
@@ -140,7 +137,6 @@ func reset_loop():
 		level_ui.update_steps(remaining_steps)
 		_init_history()
 
-## Initialize player with level settings and connect signals
 ## Initialize player with level settings and connect signals
 func _ready():
 
@@ -166,7 +162,6 @@ func _ready():
 
 	_init_history()
 
-## Handle player input for movement and loop creation
 ## Handle player input for movement and loop creation
 func _unhandled_input(event: InputEvent) -> void:
 	# Ignore input for clones

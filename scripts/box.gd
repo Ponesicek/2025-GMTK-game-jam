@@ -1,21 +1,32 @@
+## Movable box that can be pushed by the player and records its movement history.
+## Supports undo/redo and loop reset functionality.
 extends Area2D
 
 @onready var ray_cast_2d : RayCast2D = $BoxRaycast
 @onready var level : Node2D = get_tree().get_root().get_node('level')
 
+## History of box positions for each step
 var step_history : Array[Vector2] = []
 
+## Initialize box and connect to level signals
 func _ready():
 	level.undo.connect(undo)
 	level.step.connect(step)
 	level.end_loop.connect(end_loop)
 	level.reset_loop.connect(reset_loop)
 	init_history()
-	
+
+## Initialize position history with current position
 func init_history():
 	step_history = []
 	step_history.append(position)
 
+## Attempt to move the box in the given direction.
+## Returns true if move was successful, false if blocked.
+## Supports pushing other boxes (respecting push limit).
+## Attempt to move the box in the given direction.
+## Returns true if move was successful, false if blocked.
+## Supports pushing other boxes (respecting push limit).
 func move(destination, limit):
 	if limit > -1:
 		limit -= 1
@@ -39,18 +50,22 @@ func move(destination, limit):
 		return false
 	return true
 
+## Record current position in history when a step occurs
 func step():
 	step_history.append(position)
 
+## Undo last move by restoring previous position
 func undo():
 	if not len(step_history) == 1:
 		var last_position = step_history[-2]
 		step_history.pop_back()
 		position = last_position
 
+## Reset box to starting position when loop ends
 func end_loop():
 	position = step_history[0]
 	init_history()
 
+## Reset loop (same as end_loop for boxes)
 func reset_loop():
-	end_loop()		#well the code is the same so why not?
+	end_loop()

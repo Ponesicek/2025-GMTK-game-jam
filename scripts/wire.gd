@@ -16,7 +16,7 @@ func _ready() -> void:
 	wireState = false
 
 ## Change wire state and propagate to overlapping connected objects
-func state_change(state : bool):
+func state_change(state: bool) -> void:
 	if wireState != state:
 		wireState = state
 		for i in get_overlapping_areas():
@@ -29,10 +29,10 @@ func state_change(state : bool):
 			animation_player.set_frame(0)
 
 ## Reset wire to off state when loop ends
-func end_loop():
+func end_loop() -> void:
 	animation_player.set_frame(0)
 	wireState = false
 
 ## Reset wire (same as end_loop)
-func reset_loop():
+func reset_loop() -> void:
 	end_loop()

@@ -35,22 +35,21 @@ func _on_body_entered(_body):
 		animation_player.set_frame(1)
 
 ## Reset button to unpressed state when loop ends
-func end_loop():
+func end_loop() -> void:
 	activated = false
 	animation_player.set_frame(0)
 	sim_step = 0
 
 ## Reset button (same as end_loop)
-func reset_loop():
+func reset_loop() -> void:
 	end_loop()
 
 ## Increment step counter when a game step occurs
-func step():
+func step() -> void:
 	sim_step += 1
 
 ## Undo button press if undoing past the activation step
-## Undo button press if undoing past the activation step
-func undo():
+func undo() -> void:
 	sim_step -= 1
 	if sim_step == activation_step-1:
 		activated = false

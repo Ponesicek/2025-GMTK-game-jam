@@ -7,5 +7,5 @@ var steps_left = 7
 
 ## Update the steps remaining display
 ## Warning: This implementation appears incorrect and may not be used
-func update_steps(value):
+func update_steps(value: int) -> void:
 	text = "Steps left: " + str(value)

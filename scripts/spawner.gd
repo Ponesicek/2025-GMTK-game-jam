@@ -2,6 +2,9 @@
 ## When a loop ends, creates a new player instance at its position.
 extends Area2D
 
+## Size of one grid cell (tiles are 32x32)
+const GRID_SIZE : int = 32
+
 @onready var ray_cast_2d : RayCast2D = $BoxRaycast
 @onready var level : Node2D = get_tree().get_root().get_node('level')
 @onready var tile_set : TileMapLayer = level.get_node('BGTileMapLayer')
@@ -23,17 +26,14 @@ func _ready():
 	init_history()
 
 ## Initialize position history with current position
-func init_history():
+func init_history() -> void:
 	step_history.clear()
 	step_history.append(position)
 
 ## Attempt to move the spawner in the given direction.
 ## Returns true if move was successful, false if blocked.
 ## Supports pushing other movable objects (respecting push limit).
-## Attempt to move the spawner in the given direction.
-## Returns true if move was successful, false if blocked.
-## Supports pushing other movable objects (respecting push limit).
-func move(destination, limit):
+func move(destination: Vector2, limit: int) -> bool:
 	if limit > -1:
 		limit -= 1
 		if limit < 0:
@@ -57,25 +57,25 @@ func move(destination, limit):
 	return true
 
 ## Record current position in history when a step occurs
-func step():
+func step() -> void:
 	step_history.append(position)
 
 ## Undo last move by restoring previous position
-func undo():
+func undo() -> void:
 	if step_history.size() > 1:
 		var last_position = step_history[-2]
 		step_history.pop_back()
 		position = last_position
 
 ## Spawn a new player clone when loop ends, then reset to starting position
-func end_loop():
+func end_loop() -> void:
 	var new_player = player_scene.instantiate()
-	new_player.position = position + Vector2(32,0)
+	new_player.position = position + Vector2(GRID_SIZE, 0)
 	tile_set.add_child(new_player)
 	position = step_history[0]
 	init_history()
 
 ## Reset spawner to starting position
-func reset_loop():
+func reset_loop() -> void:
 	position = step_history[0]
 	init_history()

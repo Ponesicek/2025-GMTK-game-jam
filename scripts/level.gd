@@ -53,21 +53,21 @@ func _unhandled_input(event):
 			undo.emit()
 
 ## Force a step to occur (called by player when they move)
-func force_step():
+func force_step() -> void:
 	step_counter += 1
 	step.emit()
 
 ## Force the current loop to end (called when player creates a clone)
-func force_end_loop():
+func force_end_loop() -> void:
 	step_counter = 0
 	end_loop.emit()
 
 ## Called when a loop ends, decrements loop counter
-func on_loop_ended():
+func on_loop_ended() -> void:
 	loop_limit -= 1
 	if loop_limit == 0 :
 		on_loops_depleted()
 
 ## Called when all loops are used up, reloads the level
-func on_loops_depleted():
+func on_loops_depleted() -> void:
 	get_tree().reload_current_scene()

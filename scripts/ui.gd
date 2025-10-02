@@ -12,9 +12,9 @@ func _ready() -> void:
 	loopLabel.visible = level.can_loop
 
 ## Update the steps remaining display
-func update_steps(value):
+func update_steps(value: int) -> void:
 	stepLabel.text = 'Steps left: ' + str(value)
 
 ## Update the clones remaining display
-func update_loops(value):
+func update_loops(value: int) -> void:
 	loopLabel.text = 'Clones left: ' + str(value)

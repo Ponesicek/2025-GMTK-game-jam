@@ -5,7 +5,7 @@ extends Area2D
 @onready var level : Node2D = get_tree().get_root().get_node('level')
 
 ## Handle player reaching the finish line and transition to next level
-func win(_trash):
+func win(_trash) -> void:
 	var level_name = level.scene_file_path
 	var regex = RegEx.new()
 	regex.compile(r"level_(\d+)\.tscn")

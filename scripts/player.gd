@@ -98,7 +98,7 @@ func move(destination: Vector2) -> bool:
 	return slid
 
 ## Undo the last action (for clones: go back in replay, for player: restore last position)
-func undo():
+func undo() -> void:
 	if clone:
 		replay_step -= 1
 		position = step_history[replay_step % step_history.size()]
@@ -111,7 +111,7 @@ func undo():
 			level_ui.update_steps(remaining_steps)
 
 ## End the current loop and convert to a clone (or reset clone to start)
-func end_loop():
+func end_loop() -> void:
 	if not clone:
 		clone = true
 		player_sprite.modulate = Color(clone_colors[randi() % clone_colors.size()], 0.5)
@@ -119,7 +119,7 @@ func end_loop():
 	replay_step = 0
 
 ## Advance one step (for clones: replay next move, original does nothing here)
-func step():
+func step() -> void:
 	if clone:
 		if (replay_step % step_history.size()) == (step_history.size() - 1):
 			position = step_history[0]
@@ -129,7 +129,7 @@ func step():
 		replay_step += 1
 
 ## Reset to the beginning of the loop
-func reset_loop():
+func reset_loop() -> void:
 	position = step_history[0]
 	replay_step = 0
 	if not clone:

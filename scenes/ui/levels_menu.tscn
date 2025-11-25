@@ -1,258 +1,62 @@
-[gd_scene load_steps=18 format=3 uid="uid://bc6mlfem5nhyv"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" uid="uid://b2pljpijfwm6w" path="res://scripts/levels_menu.gd" id="1_r3otx"]
-[ext_resource type="PackedScene" uid="uid://ber1ittvitqas" path="res://scenes/ui/level_box_ui.tscn" id="2_grwcp"]
-[ext_resource type="Theme" uid="uid://n4po45dec42u" path="res://themes/menu_theme.tres" id="2_sggmd"]
-[ext_resource type="Texture2D" uid="uid://cx5rc82rxtpf3" path="res://assets/level_1_icon.jpg" id="3_5r7aj"]
-[ext_resource type="Texture2D" uid="uid://6f6q50df2bf0" path="res://assets/level_2_icon.jpg" id="4_tkrcc"]
-[ext_resource type="Texture2D" uid="uid://dut3yknyb5fwo" path="res://assets/level_8_icon.jpg" id="5_1yd5k"]
-[ext_resource type="Texture2D" uid="uid://cxljtmrl34t2c" path="res://assets/level_3_icon.jpg" id="5_tkrcc"]
-[ext_resource type="Texture2D" uid="uid://caq5oi8kdqt3d" path="res://assets/level_4_icon.jpg" id="6_rk57y"]
-[ext_resource type="Texture2D" uid="uid://bd4xi42hxvpk1" path="res://assets/level_9_icon.jpg" id="7_up8mi"]
-[ext_resource type="Texture2D" uid="uid://dc4j5bqpvd5ps" path="res://assets/level_10_icon.jpg" id="9_c5c0h"]
-[ext_resource type="Texture2D" uid="uid://d0e2gr551vdr1" path="res://assets/level_11_icon.jpg" id="11_jk158"]
-[ext_resource type="Texture2D" uid="uid://ue4csxd6jv16" path="res://assets/level_5_icon.jpg" id="12_8d6b5"]
-[ext_resource type="Texture2D" uid="uid://bffnrbx5xr81q" path="res://assets/level_12_icon.jpg" id="13_gpl5k"]
-[ext_resource type="Texture2D" uid="uid://cyma8e6tj6xe0" path="res://assets/level_6_icon.jpg" id="14_h4pct"]
-[ext_resource type="Texture2D" uid="uid://bv2ebxyy8raco" path="res://assets/level_13_icon.jpg" id="15_dgh7c"]
-[ext_resource type="Texture2D" uid="uid://bwpv8auvc1r8j" path="res://assets/level_7_icon.jpg" id="16_7mtip"]
-[ext_resource type="Texture2D" uid="uid://vvuxy8tbj1t2" path="res://assets/level_14_icon.jpg" id="17_gsfi2"]
+[ext_resource type="Script" path="res://scripts/levels_menu.gd" id="1_f8ljs"]
+[ext_resource type="PackedScene" path="res://scenes/ui/LevelTile.tscn" id="2_5aeq1"]
+[ext_resource type="Theme" path="res://themes/menu_theme.tres" id="3_0s6xp"]
 
 [node name="levels menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_r3otx")
+script = ExtResource("1_f8ljs")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
+[node name="BG" type="Panel" parent="."]
+anchors_preset = 15
+theme = ExtResource("3_0s6xp")
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Margin" type="MarginContainer" parent="."]
 anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.95
-anchor_bottom = 0.95
-grow_horizontal = 2
-grow_vertical = 2
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.98
+anchor_bottom = 0.98
 
-[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
-size_flags_horizontal = 0
+theme = ExtResource("3_0s6xp")
+theme_override_constants/separation = 24
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="MarginContainer/HSplitContainer"]
+[node name="Header" type="Label" parent="Margin/VBox"]
+text = "Select Level"
+theme = ExtResource("3_0s6xp")
+horizontal_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/VBox"]
 layout_mode = 2
-size_flags_horizontal = 0
+custom_minimum_size = Vector2(800, 600)
+size_flags_vertical = 3
+size_flags_horizontal = 4
+
+[node name="Grid" type="GridContainer" parent="Margin/VBox/Scroll"]
+clip_contents = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 24
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/VBox"]
+size_flags_horizontal = 4
 size_flags_vertical = 0
-theme = ExtResource("2_sggmd")
-theme_override_font_sizes/font_size = 18
-text = "levels:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HSplitContainer"]
-layout_mode = 2
-
-[node name="collum_1" type="VBoxContainer" parent="MarginContainer/HSplitContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="level_1" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_1" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "scenes/levels/level_1.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_1/level_1" index="1"]
-texture = ExtResource("3_5r7aj")
-region_enabled = false
-region_rect = Rect2(1351.42, 486.947, 235, 183)
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_1/level_1/Sprite2D" index="0"]
-text = "LEVEL: 1"
-
-[node name="level_8" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_1" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "res://scenes/levels/level_8.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_1/level_8" index="1"]
-texture = ExtResource("5_1yd5k")
-region_enabled = false
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_1/level_8/Sprite2D" index="0"]
-text = "LEVEL: 8"
-
-[node name="collum_2" type="VBoxContainer" parent="MarginContainer/HSplitContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="level_2" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_2" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "scenes/levels/level_2.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_2/level_2" index="1"]
-texture = ExtResource("4_tkrcc")
-region_enabled = false
-region_rect = Rect2(746.961, 301.59, 235, 183)
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_2/level_2/Sprite2D" index="0"]
-text = "LEVEL: 2"
-
-[node name="level_9" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_2" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "res://scenes/levels/level_9.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_2/level_9" index="1"]
-texture = ExtResource("7_up8mi")
-region_enabled = false
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_2/level_9/Sprite2D" index="0"]
-text = "LEVEL: 9"
-
-[node name="collum_3" type="VBoxContainer" parent="MarginContainer/HSplitContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="level_3" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_3" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "scenes/levels/level_3.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_3/level_3" index="1"]
-texture = ExtResource("5_tkrcc")
-region_enabled = false
-region_rect = Rect2(847.693, 482.578, 235, 183)
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_3/level_3/Sprite2D" index="0"]
-text = "LEVEL: 3"
-
-[node name="level_10" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_3" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "res://scenes/levels/level_10.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_3/level_10" index="1"]
-texture = ExtResource("9_c5c0h")
-region_enabled = false
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_3/level_10/Sprite2D" index="0"]
-text = "LEVEL: 10"
-
-[node name="collum_4" type="VBoxContainer" parent="MarginContainer/HSplitContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="level_4" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_4" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "res://scenes/levels/level_4.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_4/level_4" index="1"]
-texture = ExtResource("6_rk57y")
-region_enabled = false
-region_rect = Rect2(841, 595.735, 235, 183)
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_4/level_4/Sprite2D" index="0"]
-text = "LEVEL: 4"
-
-[node name="level_11" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_4" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "res://scenes/levels/level_11.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_4/level_11" index="1"]
-texture = ExtResource("11_jk158")
-region_enabled = false
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_4/level_11/Sprite2D" index="0"]
-text = "LEVEL: 11"
-
-[node name="collum_5" type="VBoxContainer" parent="MarginContainer/HSplitContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="level_5" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_5" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "res://scenes/levels/level_5.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_5/level_5" index="1"]
-texture = ExtResource("12_8d6b5")
-region_enabled = false
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_5/level_5/Sprite2D" index="0"]
-text = "LEVEL: 5"
-
-[node name="level_12" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_5" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "res://scenes/levels/level_12.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_5/level_12" index="1"]
-texture = ExtResource("13_gpl5k")
-region_enabled = false
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_5/level_12/Sprite2D" index="0"]
-text = "LEVEL: 12"
-
-[node name="collum_6" type="VBoxContainer" parent="MarginContainer/HSplitContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="level_6" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_6" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "res://scenes/levels/level_6.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_6/level_6" index="1"]
-texture = ExtResource("14_h4pct")
-region_enabled = false
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_6/level_6/Sprite2D" index="0"]
-text = "LEVEL: 6"
-
-[node name="level_13" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_6" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "res://scenes/levels/level_13.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_6/level_13" index="1"]
-texture = ExtResource("15_dgh7c")
-region_enabled = false
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_6/level_13/Sprite2D" index="0"]
-text = "LEVEL: 13"
-
-[node name="collum_7" type="VBoxContainer" parent="MarginContainer/HSplitContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="level_7" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_7" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "res://scenes/levels/level_7.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_7/level_7" index="1"]
-texture = ExtResource("16_7mtip")
-region_enabled = false
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_7/level_7/Sprite2D" index="0"]
-text = "LEVEL: 7"
-
-[node name="level_14" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_7" instance=ExtResource("2_grwcp")]
-layout_mode = 2
-path = "res://scenes/levels/level_14.tscn"
-
-[node name="Sprite2D" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_7/level_14" index="1"]
-texture = ExtResource("17_gsfi2")
-region_enabled = false
-
-[node name="Label" parent="MarginContainer/HSplitContainer/HBoxContainer/collum_7/level_14/Sprite2D" index="0"]
-text = "LEVEL: 14"
-
-[node name="Back button" type="Button" parent="MarginContainer"]
-custom_minimum_size = Vector2(200, 75)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-theme = ExtResource("2_sggmd")
-theme_override_font_sizes/font_size = 18
-text = "back"
-
-[connection signal="pressed" from="MarginContainer/Back button" to="." method="_on_back_button_pressed"]
-
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_1/level_1"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_1/level_8"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_2/level_2"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_2/level_9"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_3/level_3"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_3/level_10"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_4/level_4"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_4/level_11"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_5/level_5"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_5/level_12"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_6/level_6"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_6/level_13"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_7/level_7"]
-[editable path="MarginContainer/HSplitContainer/HBoxContainer/collum_7/level_14"]
+[node name="Back" type="Button" parent="Margin/VBox/Buttons"]
+custom_minimum_size = Vector2(200, 64)
+text = "Back"
+theme = ExtResource("3_0s6xp")

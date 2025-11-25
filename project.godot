@@ -101,6 +101,9 @@ ingame_menu={
 ]
 }
 
+[autoload]
+SceneTransition="*res://scripts/scene_transition.gd"
+
 [layer_names]
 
 2d_physics/layer_1="tile map layer"

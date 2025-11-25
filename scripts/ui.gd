@@ -3,7 +3,7 @@ extends Control
 @onready var stepLabel : Label = $BoxContainer/GameInfo/Steps
 @onready var loopLabel : Label = $BoxContainer/GameInfo/Loops
 
-@onready var level = get_tree().get_root().get_node('level')
+@onready var level = get_parent()
 
 func _ready() -> void:
 	loopLabel.visible = level.can_loop

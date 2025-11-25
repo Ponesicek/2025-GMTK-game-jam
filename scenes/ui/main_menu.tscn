@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://diapffo61qq3v"]
 
 [ext_resource type="Script" uid="uid://ddnxgij3ykx8r" path="res://scripts/main_menu.gd" id="1_sl1te"]
-[ext_resource type="Theme" path="res://themes/menu_theme.tres" id="2_fe2o3"]
+[ext_resource type="Theme" uid="uid://n4po45dec42u" path="res://themes/menu_theme.tres" id="2_fe2o3"]
 
 [node name="main menu" type="Control"]
 layout_mode = 3
@@ -65,15 +65,6 @@ theme = ExtResource("2_fe2o3")
 theme_override_font_sizes/font_size = 27
 text = "exit
 "
-
-[node name="Label" type="Label" parent="MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-size_flags_stretch_ratio = 21.8
-theme = ExtResource("2_fe2o3")
-theme_override_font_sizes/font_size = 36
-text = "MADE FOR GMTK GAMEJAM 2025"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]

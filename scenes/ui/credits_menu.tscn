@@ -26,13 +26,14 @@ grow_vertical = 2
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 0
+size_flags_vertical = 4
+alignment = 1
 
 [node name="credits" type="Label" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme = ExtResource("2_41cr8")
-theme_override_font_sizes/font_size = 27
+theme_override_font_sizes/font_size = 36
 text = "CREDITS"
 horizontal_alignment = 1
 
@@ -40,12 +41,14 @@ horizontal_alignment = 1
 layout_mode = 2
 theme = ExtResource("2_41cr8")
 theme_override_font_sizes/font_size = 18
-text = "CREATORS:"
+text = "TEAM"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 8
+alignment = 1
 
 [node name="names" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -80,28 +83,25 @@ layout_mode = 2
 [node name="nevim itch link" type="LinkButton" parent="MarginContainer/VBoxContainer/HBoxContainer/itch profiles"]
 layout_mode = 2
 theme = ExtResource("2_41cr8")
-theme_override_colors/font_color = Color(0.567622, 0.708996, 1, 1)
 theme_override_font_sizes/font_size = 18
 action_mode = 0
-text = "itch profile"
+text = "nevim1 on itch.io"
 uri = "https://itch.io/profile/nevim1"
 
 [node name="veejay itch link" type="LinkButton" parent="MarginContainer/VBoxContainer/HBoxContainer/itch profiles"]
 layout_mode = 2
 theme = ExtResource("2_41cr8")
-theme_override_colors/font_color = Color(0.567622, 0.708996, 1, 1)
 theme_override_font_sizes/font_size = 18
 action_mode = 0
-text = "itch profile"
+text = "VeejayIam on itch.io"
 uri = "https://veejayiam.itch.io/"
 
 [node name="ponesicek itch link" type="LinkButton" parent="MarginContainer/VBoxContainer/HBoxContainer/itch profiles"]
 layout_mode = 2
 theme = ExtResource("2_41cr8")
-theme_override_colors/font_color = Color(0.567622, 0.708996, 1, 1)
 theme_override_font_sizes/font_size = 18
 action_mode = 0
-text = "itch profile"
+text = "ponesicek on itch.io"
 uri = "https://ponesicek.itch.io/"
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
@@ -114,71 +114,70 @@ layout_mode = 2
 [node name="nevim git link" type="LinkButton" parent="MarginContainer/VBoxContainer/HBoxContainer/github profiles"]
 layout_mode = 2
 theme = ExtResource("2_41cr8")
-theme_override_colors/font_color = Color(0.568627, 0.709804, 1, 1)
 theme_override_font_sizes/font_size = 18
 action_mode = 0
-text = "github profile"
+text = "nevim1 on GitHub"
 uri = "https://github.com/nevim1"
 
 [node name="veejay git link" type="LinkButton" parent="MarginContainer/VBoxContainer/HBoxContainer/github profiles"]
 layout_mode = 2
 theme = ExtResource("2_41cr8")
-theme_override_colors/font_color = Color(0.568627, 0.709804, 1, 1)
 theme_override_font_sizes/font_size = 18
 action_mode = 0
-text = "github profile"
+text = "VeejayIam on GitHub"
 uri = "https://github.com/VeejayIam"
 
 [node name="ponesicek git link" type="LinkButton" parent="MarginContainer/VBoxContainer/HBoxContainer/github profiles"]
 layout_mode = 2
 theme = ExtResource("2_41cr8")
-theme_override_colors/font_color = Color(0.568627, 0.709804, 1, 1)
 theme_override_font_sizes/font_size = 18
 action_mode = 0
-text = "github profile"
+text = "Ponesicek on GitHub"
 uri = "https://github.com/Ponesicek"
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_41cr8")
-theme_override_font_sizes/font_size = 18
-text = "USED CODE:"
+theme_override_font_sizes/font_size = 20
+text = "Used code"
 horizontal_alignment = 1
 
 [node name="LinkButton" type="LinkButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_41cr8")
-theme_override_colors/font_color = Color(0.568627, 0.709804, 1, 1)
 theme_override_font_sizes/font_size = 18
 action_mode = 0
-text = "movement code"
+text = "Grid-based movement tutorial by Peanuts_Code"
 uri = "https://www.peanuts-code.com/en/tutorials/gd0010_2d_grid_based_movement/"
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_41cr8")
-theme_override_font_sizes/font_size = 18
-text = "USED FONT:"
+theme_override_font_sizes/font_size = 20
+text = "Font"
 horizontal_alignment = 1
 
 [node name="LinkButton2" type="LinkButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_41cr8")
-theme_override_colors/font_color = Color(0.568627, 0.709804, 1, 1)
 theme_override_font_sizes/font_size = 18
-text = "PIXELATED ELEGANCE"
+text = "Pixelated Elegance by GGBotNet"
 uri = "https://www.fontspace.com/pixelated-elegance-font-f126145"
 
-[node name="Button" type="Button" parent="MarginContainer"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("2_41cr8")
 theme_override_font_sizes/font_size = 27
 action_mode = 0
 text = "back"
 
-[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

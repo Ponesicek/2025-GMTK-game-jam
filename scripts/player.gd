@@ -45,7 +45,7 @@ var clone_colors : Array[Color] = [
 @onready var ray_cast_2d : RayCast2D = $PlayerRaycast
 @onready var ray_cast_fast : RayCast2D = $RayCastFast # Reserved (not strictly required after refactor)
 @onready var player_sprite : Sprite2D = $PlayerSprite
-@onready var level_ui = get_tree().get_root().get_node("level/UI")
+@onready var level_ui = get_tree().get_root().get_node("level/UI/UIControl")
 @onready var level : Node2D = get_tree().get_root().get_node("level")
 
 # -------- Initialization --------

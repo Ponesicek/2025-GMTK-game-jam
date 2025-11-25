@@ -10,7 +10,18 @@ func _ready():
 
 func _populate_levels():
 	print("Populating levels menu")
-	for i in range(1, 15):
+	var levels = []
+	var dir = DirAccess.open("res://scenes/levels")
+	if dir:
+		for file_name in dir.get_files():
+			if file_name.ends_with(".tscn") and file_name.begins_with("level_"):
+				var level_number_str = file_name.trim_prefix("level_").trim_suffix(".tscn")
+				if level_number_str.is_valid_int():
+					levels.append(level_number_str.to_int())
+
+	levels.sort()
+
+	for i in levels:
 		var scene_path = "res://scenes/levels/level_%d.tscn" % i
 		var icon_path = "res://assets/level_%d_icon.jpg" % i
 		var icon_tex: Texture2D = null

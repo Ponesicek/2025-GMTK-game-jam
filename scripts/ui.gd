@@ -29,6 +29,12 @@ func show_win_menu(next_level_path: String, has_next: bool) -> void:
 	_next_level_path = next_level_path
 	_has_next = has_next
 
+	# Snap all player animations to completion before pausing
+	var players = get_tree().get_nodes_in_group("players")
+	for player in players:
+		if player.has_method("snap_animation"):
+			player.snap_animation()
+
 	if win_menu:
 		win_menu.visible = true
 		next_button.disabled = not has_next

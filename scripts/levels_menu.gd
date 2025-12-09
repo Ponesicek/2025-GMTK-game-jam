@@ -10,7 +10,7 @@ func _ready():
 
 func _populate_levels():
 	print("Populating levels menu")
-	for i in range(1, 15):
+	for i in range(1, 16):
 		var scene_path = "res://scenes/levels/level_%d.tscn" % i
 		var icon_path = "res://assets/level_%d_icon.jpg" % i
 		var icon_tex: Texture2D = null

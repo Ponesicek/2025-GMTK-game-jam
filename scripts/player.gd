@@ -149,7 +149,7 @@ func _attempt_multi_tile(delta: Vector2) -> bool:
 
 # Public move entry point.
 # destination is expected to be (dir * grid_size) for a normal input OR possibly larger (clone replay).
-func move(destination: Vector2) -> bool:
+func move(destination: Vector2, _push_limit: int = -1) -> bool:
 	var start_pos := position
 	var result := _move_logic(destination)
 	var total_movement := position - start_pos

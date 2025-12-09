@@ -1,62 +1,65 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://byx40jn8gfb8t"]
 
-[ext_resource type="Script" path="res://scripts/levels_menu.gd" id="1_f8ljs"]
-[ext_resource type="PackedScene" path="res://scenes/ui/LevelTile.tscn" id="2_5aeq1"]
-[ext_resource type="Theme" path="res://themes/menu_theme.tres" id="3_0s6xp"]
+[ext_resource type="Script" uid="uid://b2pljpijfwm6w" path="res://scripts/levels_menu.gd" id="1_f8ljs"]
+[ext_resource type="Theme" uid="uid://n4po45dec42u" path="res://themes/menu_theme.tres" id="3_0s6xp"]
 
 [node name="levels menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_f8ljs")
 
 [node name="BG" type="Panel" parent="."]
-anchors_preset = 15
-theme = ExtResource("3_0s6xp")
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource("3_0s6xp")
 
 [node name="Margin" type="MarginContainer" parent="."]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.02
 anchor_top = 0.02
 anchor_right = 0.98
 anchor_bottom = 0.98
 
 [node name="VBox" type="VBoxContainer" parent="Margin"]
-layout_mode = 2
-theme = ExtResource("3_0s6xp")
-theme_override_constants/separation = 24
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("3_0s6xp")
+theme_override_constants/separation = 24
 
 [node name="Header" type="Label" parent="Margin/VBox"]
-text = "Select Level"
+layout_mode = 2
 theme = ExtResource("3_0s6xp")
+text = "Select Level"
 horizontal_alignment = 1
 
 [node name="Scroll" type="ScrollContainer" parent="Margin/VBox"]
-layout_mode = 2
 custom_minimum_size = Vector2(800, 600)
-size_flags_vertical = 3
+layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 3
 
 [node name="Grid" type="GridContainer" parent="Margin/VBox/Scroll"]
-clip_contents = false
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 4
 theme_override_constants/h_separation = 24
 theme_override_constants/v_separation = 24
+columns = 4
 
 [node name="Buttons" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="Back" type="Button" parent="Margin/VBox/Buttons"]
 custom_minimum_size = Vector2(200, 64)
-text = "Back"
+layout_mode = 2
 theme = ExtResource("3_0s6xp")
+text = "Back"

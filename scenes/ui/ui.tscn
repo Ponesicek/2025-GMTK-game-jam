@@ -2,9 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dacupt4cucr2h" path="res://scripts/ingame_ui.gd" id="1_nt7q6"]
 [ext_resource type="Script" uid="uid://h04nv6yy1pjf" path="res://scripts/ui.gd" id="1_x4jx1"]
-[ext_resource type="Theme" path="res://themes/menu_theme.tres" id="3_aac20"]
+[ext_resource type="Theme" uid="uid://n4po45dec42u" path="res://themes/menu_theme.tres" id="3_aac20"]
 
-[node name="UI" type="Control"]
+[node name="UI" type="CanvasLayer"]
+layer = 10
+
+[node name="UIControl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x4jx1")
 
-[node name="BoxContainer" type="BoxContainer" parent="."]
+[node name="BoxContainer" type="BoxContainer" parent="UIControl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,40 +25,107 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nt7q6")
 
-[node name="GameInfo" type="VBoxContainer" parent="BoxContainer"]
+[node name="GameInfo" type="VBoxContainer" parent="UIControl/BoxContainer"]
 layout_mode = 2
 
-[node name="Steps" type="Label" parent="BoxContainer/GameInfo"]
+[node name="Steps" type="Label" parent="UIControl/BoxContainer/GameInfo"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 20
 text = "Steps left: "
 
-[node name="Loops" type="Label" parent="BoxContainer/GameInfo"]
+[node name="Loops" type="Label" parent="UIControl/BoxContainer/GameInfo"]
 layout_mode = 2
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 20
 text = "Clones left: "
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UIControl/BoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 
-[node name="exit menu" type="Button" parent="BoxContainer/VBoxContainer"]
+[node name="exit menu" type="Button" parent="UIControl/BoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
 theme = ExtResource("3_aac20")
 theme_override_font_sizes/font_size = 18
 text = "EXIT TO MENU"
 
-[node name="exit desktop" type="Button" parent="BoxContainer/VBoxContainer"]
+[node name="exit desktop" type="Button" parent="UIControl/BoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
 theme = ExtResource("3_aac20")
 theme_override_font_sizes/font_size = 18
 text = "EXIT TO DESKTOP"
 
-[connection signal="pressed" from="BoxContainer/VBoxContainer/exit menu" to="BoxContainer" method="_on_exit_menu_pressed"]
-[connection signal="pressed" from="BoxContainer/VBoxContainer/exit desktop" to="BoxContainer" method="_on_exit_desktop_pressed"]
+[node name="WinMenu" type="Control" parent="UIControl"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Background" type="ColorRect" parent="UIControl/WinMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Center" type="CenterContainer" parent="UIControl/WinMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="UIControl/WinMenu/Center"]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 2
+color = Color(0.47691286, 0.62522745, 1, 1)
+
+[node name="VBox" type="VBoxContainer" parent="UIControl/WinMenu/Center/Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -88.5
+offset_right = 100.0
+offset_bottom = 88.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_aac20")
+
+[node name="Label" type="Label" parent="UIControl/WinMenu/Center/Background/VBox"]
+layout_mode = 2
+text = "Level complete"
+horizontal_alignment = 1
+
+[node name="NextLevel" type="Button" parent="UIControl/WinMenu/Center/Background/VBox"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+theme = ExtResource("3_aac20")
+text = "Next level"
+
+[node name="Menu" type="Button" parent="UIControl/WinMenu/Center/Background/VBox"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+theme = ExtResource("3_aac20")
+text = "Menu"
+
+[connection signal="pressed" from="UIControl/BoxContainer/VBoxContainer/exit menu" to="UIControl/BoxContainer" method="_on_exit_menu_pressed"]
+[connection signal="pressed" from="UIControl/BoxContainer/VBoxContainer/exit desktop" to="UIControl/BoxContainer" method="_on_exit_desktop_pressed"]

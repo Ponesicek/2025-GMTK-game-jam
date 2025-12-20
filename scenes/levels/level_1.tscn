@@ -12,14 +12,6 @@ loop_limit = 0
 step_limit = 20
 
 [node name="UI" parent="." instance=ExtResource("2_pn6ll")]
-z_index = 4
-anchors_preset = 9
-anchor_right = 0.0
-offset_left = 16.0
-offset_top = 24.0
-offset_right = 1900.0
-offset_bottom = 1080.0
-grow_horizontal = 1
 metadata/_edit_lock_ = true
 
 [node name="BGTileMapLayer" type="TileMapLayer" parent="."]
@@ -31,7 +23,7 @@ metadata/_edit_lock_ = true
 
 [node name="FGTileMapLayer" type="TileMapLayer" parent="BGTileMapLayer"]
 z_index = 1
-tile_map_data = PackedByteArray("AAADAAMAAQAAAAAABgAKAAUAAQAAAAAAAQAHAAMAAQAAAAAABAAFAAUAAQAAAAAABAAFAAMAAQAAAAAABAA=")
+tile_map_data = PackedByteArray("AAADAAMAAQAAAAAABgAEAAQAAQAAAAAAAgA=")
 tile_set = ExtResource("4_6761a")
 metadata/_edit_lock_ = true
 
@@ -89,6 +81,4 @@ offset_bottom = 729.875
 theme = ExtResource("4_x42e6")
 text = "You can undo with Z and reset the whole level with R"
 
-[connection signal="body_entered" from="BGTileMapLayer/FGTileMapLayer/@Area2D@34412" to="BGTileMapLayer/FGTileMapLayer/@Area2D@34412" method="_on_body_entered"]
-[connection signal="body_exited" from="BGTileMapLayer/FGTileMapLayer/@Area2D@34412" to="BGTileMapLayer/FGTileMapLayer/@Area2D@34412" method="_on_body_exited"]
 [connection signal="body_entered" from="BGTileMapLayer/Area2D" to="BGTileMapLayer/Area2D" method="win"]

@@ -35,6 +35,11 @@ var on_fast_line : bool = false		 # Move 2 tiles (or as far as possible up to 2)
 
 var can_create_clones : bool = false
 
+# Tween animation
+var is_animating : bool = false
+const TWEEN_DURATION : float = 0.06
+var current_tween : Tween = null
+
 var clone_colors : Array[Color] = [
 	Color('0000ff'), Color('00ff00'), Color('ff0000'),
 	Color('7c00b5'), Color('94d121'), Color('e77239'),
@@ -45,11 +50,12 @@ var clone_colors : Array[Color] = [
 @onready var ray_cast_2d : RayCast2D = $PlayerRaycast
 @onready var ray_cast_fast : RayCast2D = $RayCastFast # Reserved (not strictly required after refactor)
 @onready var player_sprite : Sprite2D = $PlayerSprite
-@onready var level_ui = get_tree().get_root().get_node("level/UI")
+@onready var level_ui = get_tree().get_root().get_node("level/UI/UIControl")
 @onready var level : Node2D = get_tree().get_root().get_node("level")
 
 # -------- Initialization --------
 func _ready():
+	add_to_group("players")
 	remaining_steps = level.step_limit
 	push_limit = level.push_limit
 	can_create_clones = level.can_loop
@@ -79,8 +85,32 @@ func _setup_raycast(delta: Vector2):
 	ray_cast_2d.target_position = delta
 	ray_cast_2d.force_raycast_update()
 
+# Animate movement to target position using tween
+# This animates the sprite from an offset back to zero (catching up to logical position)
+func _animate_movement(movement_delta: Vector2) -> void:
+	is_animating = true
+	if current_tween and current_tween.is_valid():
+		current_tween.kill()
+	# Set sprite offset to where we were (negative of movement), then animate to zero
+	player_sprite.position = -movement_delta
+	current_tween = create_tween()
+	current_tween.tween_property(player_sprite, "position", Vector2.ZERO, TWEEN_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	current_tween.finished.connect(_on_tween_finished)
+
+func _on_tween_finished() -> void:
+	is_animating = false
+	player_sprite.position = Vector2.ZERO
+
+# Force-complete any running animation (useful when game pauses)
+func snap_animation() -> void:
+	if current_tween and current_tween.is_valid():
+		current_tween.kill()
+	player_sprite.position = Vector2.ZERO
+	is_animating = false
+
 # Attempt a single-tile step (delta must be exactly one grid cell vector or Vector2.ZERO).
 # Returns true if movement (or push + movement) succeeded.
+# Does NOT trigger animation - caller is responsible for that.
 func _attempt_single_step(delta: Vector2) -> bool:
 	if delta == Vector2.ZERO:
 		return true
@@ -119,7 +149,16 @@ func _attempt_multi_tile(delta: Vector2) -> bool:
 
 # Public move entry point.
 # destination is expected to be (dir * grid_size) for a normal input OR possibly larger (clone replay).
-func move(destination: Vector2) -> bool:
+func move(destination: Vector2, _push_limit: int = -1) -> bool:
+	var start_pos := position
+	var result := _move_logic(destination)
+	var total_movement := position - start_pos
+	if total_movement != Vector2.ZERO:
+		_animate_movement(total_movement)
+	return result
+
+# Internal movement logic without animation
+func _move_logic(destination: Vector2) -> bool:
 	# Wait action
 	if destination == Vector2.ZERO:
 		return true
@@ -171,6 +210,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if remaining_steps == 0:
 		return
+	if is_animating:
+		return
 
 	if event.is_action_pressed("end_loop") and remaining_loops > 0:
 		remaining_loops -= 1
@@ -193,6 +234,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # -------- Temporal / Loop Control --------
 func undo():
+	var start_pos := position
 	if clone:
 		replay_step -= 1
 		# modulo indexing safe even if negative by adding size
@@ -207,27 +249,42 @@ func undo():
 			position = last_position
 			remaining_steps += 1
 			level_ui.update_steps(remaining_steps)
+	var total_movement := position - start_pos
+	if total_movement != Vector2.ZERO:
+		_animate_movement(total_movement)
 
 func end_loop():
+	var start_pos := position
 	if not clone:
 		clone = true
 		player_sprite.modulate = Color(clone_colors[randi() % clone_colors.size()], 0.5)
 	position = step_history[0]
 	replay_step = 0
+	var total_movement := position - start_pos
+	if total_movement != Vector2.ZERO:
+		_animate_movement(total_movement)
 
 func step():
 	if clone and step_history.size() > 0:
+		var start_pos := position
 		if (replay_step % step_history.size()) == (step_history.size() - 1):
 			position = step_history[0]
+			var total_movement := position - start_pos
+			if total_movement != Vector2.ZERO:
+				_animate_movement(total_movement)
 		else:
 			var delta = step_history[(replay_step + 1) % step_history.size()] - step_history[replay_step % step_history.size()]
-			move(delta) # Replays multi-tile paths using same logic (handles two-tile or slides)
+			move(delta) # Replays multi-tile paths using same logic (handles two-tile or slides) - move() handles animation
 		replay_step += 1
 
 func reset_loop():
+	var start_pos := position
 	position = step_history[0]
 	replay_step = 0
 	if not clone:
 		remaining_steps += step_history.size() - 1
 		level_ui.update_steps(remaining_steps)
 		_init_history()
+	var total_movement := position - start_pos
+	if total_movement != Vector2.ZERO:
+		_animate_movement(total_movement)

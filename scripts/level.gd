@@ -23,7 +23,7 @@ signal reset_loop
 signal end_loop
 
 func _ready():
-	ui_steps_node = get_node("UI")
+	ui_steps_node = get_node("UI/UIControl")
 
 func _unhandled_input(event):
 	if not event.is_action_type():

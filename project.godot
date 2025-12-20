@@ -18,6 +18,10 @@ boot_splash/image="uid://bekil5dt7rvne"
 config/icon="res://misc/logo.png"
 config/windows_native_icon="res://misc/logo.ico"
 
+[autoload]
+
+SceneTransition="*res://scripts/scene_transition.gd"
+
 [display]
 
 window/size/viewport_width=1920

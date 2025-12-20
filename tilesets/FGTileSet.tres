@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=14 format=3 uid="uid://csuskmmyxj3qe"]
+[gd_resource type="TileSet" load_steps=19 format=3 uid="uid://csuskmmyxj3qe"]
 
 [ext_resource type="PackedScene" uid="uid://beokc3rk4awbf" path="res://scenes/tiles/Canon.tscn" id="1_wjsah"]
 [ext_resource type="PackedScene" uid="uid://bisqeaom56hen" path="res://scenes/tiles/wires/BLwire.tscn" id="3_caf11"]
@@ -6,10 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://c80rj1g314ywq" path="res://scenes/tiles/wires/Hwire.tscn" id="5_7ax1q"]
 [ext_resource type="PackedScene" uid="uid://c511swqjphxnf" path="res://scenes/tiles/wires/TLwire.tscn" id="6_52pww"]
 [ext_resource type="PackedScene" uid="uid://1e7cf5vfdu8g" path="res://scenes/tiles/wires/TRwire.tscn" id="7_i00n1"]
+[ext_resource type="PackedScene" path="res://scenes/tiles/conveyor_right.tscn" id="7_v2deb"]
+[ext_resource type="PackedScene" path="res://scenes/tiles/conveyor_down.tscn" id="8_caf11"]
 [ext_resource type="PackedScene" uid="uid://4lds8fep607y" path="res://scenes/tiles/box.tscn" id="8_n2raj"]
+[ext_resource type="PackedScene" path="res://scenes/tiles/conveyor_left.tscn" id="9_4xcoa"]
 [ext_resource type="PackedScene" uid="uid://n16kvlssq2ql" path="res://scenes/tiles/door.tscn" id="9_5k3ku"]
 [ext_resource type="PackedScene" uid="uid://bq3ghawm2kc2a" path="res://scenes/tiles/fast_tile.tscn" id="9_ig80b"]
+[ext_resource type="PackedScene" path="res://scenes/tiles/conveyor_up.tscn" id="10_7ax1q"]
 [ext_resource type="PackedScene" uid="uid://dlthspcp6ibil" path="res://scenes/tiles/spawner.tscn" id="11_6dpq8"]
+[ext_resource type="PackedScene" uid="uid://by2fcmqyf5bib" path="res://scenes/tiles/conveyor.tscn" id="12_eehn4"]
 [ext_resource type="PackedScene" uid="uid://3pk5xiwwd52k" path="res://scenes/tiles/Player.tscn" id="12_usyrj"]
 [ext_resource type="PackedScene" uid="uid://b20tw7x7xe062" path="res://scenes/tiles/wires/Vwire.tscn" id="15_k1cp1"]
 
@@ -20,12 +25,18 @@ scenes/3/scene = ExtResource("9_5k3ku")
 scenes/4/scene = ExtResource("9_ig80b")
 scenes/5/scene = ExtResource("11_6dpq8")
 scenes/6/scene = ExtResource("12_usyrj")
+scenes/7/scene = ExtResource("12_eehn4")
+scenes/8/scene = ExtResource("12_eehn4")
 scenes/9/scene = ExtResource("15_k1cp1")
 scenes/10/scene = ExtResource("3_caf11")
 scenes/11/scene = ExtResource("4_4xcoa")
 scenes/12/scene = ExtResource("5_7ax1q")
 scenes/13/scene = ExtResource("6_52pww")
 scenes/14/scene = ExtResource("7_i00n1")
+scenes/15/scene = ExtResource("7_v2deb")
+scenes/16/scene = ExtResource("8_caf11")
+scenes/17/scene = ExtResource("9_4xcoa")
+scenes/18/scene = ExtResource("10_7ax1q")
 
 [resource]
 tile_size = Vector2i(32, 32)
